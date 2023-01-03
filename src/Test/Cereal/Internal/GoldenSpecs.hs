@@ -99,7 +99,7 @@ goldenSpecsWithNotePlain settings@Settings {..} typeNameInfo@(TypeNameInfo {type
           _doCompatibility <- isJust <$> lookupEnv compatibilityCheckEnv
           if True -- doCompatibility
             then do
-              putStrLn "running golden tests in compatibility mode"
+              putStrLn "running in compatibility mode"
               compareCompatibilityWithGolden @s settings proxy goldenFile comparisonFile
             else
               compareWithGolden @s settings typeNameInfo proxy goldenFile comparisonFile

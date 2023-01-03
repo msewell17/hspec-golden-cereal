@@ -97,9 +97,11 @@ testConstructor Settings {..} moduleName typeName cap =
             else throwIO err
     if exists
       then do
-        doCompatibility <- isJust <$> lookupEnv compatibilityCheckEnv
-        if doCompatibility
-          then compareCompatibilityWithGolden topDir mModuleName typeName cap goldenFile
+        _doCompatibility <- isJust <$> lookupEnv compatibilityCheckEnv
+        if True -- doCompatibility
+          then do
+            putStrLn "running golden tests in compatibility mode"
+            compareCompatibilityWithGolden topDir mModuleName typeName cap goldenFile
           else
             compareWithGolden topDir mModuleName typeName cap goldenFile
               `catches` [ Handler (\(err :: HUnitFailure) -> fixIfFlag err),

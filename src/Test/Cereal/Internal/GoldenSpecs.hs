@@ -98,7 +98,9 @@ goldenSpecsWithNotePlain settings@Settings {..} typeNameInfo@(TypeNameInfo {type
         then do
           _doCompatibility <- isJust <$> lookupEnv compatibilityCheckEnv
           if True -- doCompatibility
-            then compareCompatibilityWithGolden @s settings proxy goldenFile comparisonFile
+            then do
+              putStrLn "running golden tests in compatibility mode"
+              compareCompatibilityWithGolden @s settings proxy goldenFile comparisonFile
             else
               compareWithGolden @s settings typeNameInfo proxy goldenFile comparisonFile
                 `catches` [ Handler (\(err :: HUnitFailure) -> fixIfFlag err),

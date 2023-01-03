@@ -101,7 +101,8 @@ testConstructor Settings {..} moduleName typeName cap =
         if True -- doCompatibility
           then do
             putStrLn "running golden tests in compatibility mode"
-            compareCompatibilityWithGolden topDir mModuleName typeName cap goldenFile
+            fail "test stub"
+            -- compareCompatibilityWithGolden topDir mModuleName typeName cap goldenFile
           else
             compareWithGolden topDir mModuleName typeName cap goldenFile
               `catches` [ Handler (\(err :: HUnitFailure) -> fixIfFlag err),
